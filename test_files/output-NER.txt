@@ -1,0 +1,8 @@
+Onthology/O Tutorial/O in/O Java/O
+onthology/O tutorial/O in/O java/O
+Sentosa/O is/O an/O island/O in/O Singapore/LOCATION
+sentosa/O is/O an/O island/O in/O singapore/O
+Singapore/LOCATION Sentosa/LOCATION Island/LOCATION
+singapore/LOCATION sentosa/O island/O
+Albert/PERSON Einstein/PERSON born/O in/O Germany/LOCATION
+albert/PERSON einstein/PERSON born/O in/O germany/LOCATION

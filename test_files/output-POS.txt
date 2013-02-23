@@ -1,0 +1,8 @@
+Onthology_JJ Tutorial_NN in_IN Java_NNP 
+onthology_JJ tutorial_NN in_IN java_NNP 
+Sentosa_NNP is_VBZ an_DT island_NN in_IN Singapore_NNP 
+sentosa_NNP is_VBZ an_DT island_NN in_IN singapore_NNP 
+Singapore_NNP Sentosa_NNP Island_NNP 
+singapore_NNP sentosa_NNP island_NNP 
+Albert_NNP Einstein_NNP born_VBN in_IN Germany_NNP 
+albert_NNP einstein_NNP born_VBN in_IN germany_NNP 

@@ -52,10 +52,13 @@ public class TaggerDemo
 			
 			FileReader fileIn = new FileReader(args[1]);
 			Scanner sc = new Scanner(fileIn);
+			int count = 0;
 			while (sc.hasNextLine())
 			{
 				String sentence = sc.nextLine();
-				System.out.println(tagger.tagString(sentence));
+				
+				count++;
+				System.out.print("Processing line " + count + "... ");
 				
 				if (args.length > 2)
 				{
@@ -64,6 +67,8 @@ public class TaggerDemo
 					writer.write(tagger.tagString(sentence) + "\n");
 					writer.close();
 				}
+				
+				System.out.println("done.");
 			}
 		}
 		else

@@ -63,18 +63,23 @@ public class NERDemo
 			
 			FileReader fileIn = new FileReader(args[1]);
 			Scanner sc = new Scanner(fileIn);
+			int count = 0;
 			while (sc.hasNextLine())
 			{
 				String sentence = sc.nextLine();
-				System.out.println(classifier.classifyToString(sentence));
+				
+				count++;
+				System.out.print("Processing line " + count + "... ");
 				
 				if (args.length > 2)
 				{
 					FileWriter fileOut = new FileWriter(args[2], true);
 					BufferedWriter writer = new BufferedWriter(fileOut);
-					writer.write(classifier.classifyToString(sentence) + "\n");
+					writer.write(classifier.classifyWithInlineXML(sentence) + "\n");
 					writer.close();
 				}
+				
+				System.out.println("done.");
 			}
 		}
 		else

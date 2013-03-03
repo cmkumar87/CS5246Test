@@ -1,3 +1,6 @@
+Words tagged as entities: 2907/100980 (2.878787878787879%)
+Queries with 2 or more entities: 8/40000 (0.02%)
+
 <PERSON>obama</PERSON> family tree
 french lick resort and casino
 getting organized

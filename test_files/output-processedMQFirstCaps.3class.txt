@@ -1,3 +1,6 @@
+Words tagged as entities: 21662/100980 (21.451772628243216%)
+Queries with 2 or more entities: 89/40000 (0.2225%)
+
 <PERSON>Obama</PERSON> Family Tree
 French Lick Resort And Casino
 Getting Organized

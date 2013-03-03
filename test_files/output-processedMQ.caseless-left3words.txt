@@ -1,3 +1,6 @@
+Words tagged as proper noun: 38850/101572 (38.24872996495097%)
+Queries with 2 or more proper nouns: 12498/40000 (31.245%)
+
 obama_NNP family_NNP tree_NN 
 french_JJ lick_NN resort_NN and_CC casino_NN 
 getting_VBG organized_VBN 

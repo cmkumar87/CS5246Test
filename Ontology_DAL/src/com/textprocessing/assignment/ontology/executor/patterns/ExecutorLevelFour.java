@@ -20,7 +20,7 @@ public class ExecutorLevelFour implements IExecutorLevels{
 			" { %s <http://purl.org/dc/terms/subject> ?obj1 } union " +
 			" { %s <http://purl.org/dc/terms/subject> ?obj2 } }" ;
 	private String singleQueryStr = "select * where { " +
-			" %s <http://purl.org/dc/terms/subject> %s }";
+			" %s ?pre %s }";
 	 
 
 	@Override
@@ -77,10 +77,10 @@ public class ExecutorLevelFour implements IExecutorLevels{
 					//	System.out.println(binding.getName() + " ---- " +binding.getValue());
 						String name = binding.getName();
 						String value = binding.getValue().stringValue();
-						if (name.contains("category") || name.contains("Category")) {
+						//if (name.contains("category") || name.contains("Category")) {
 							commonObjs.add(value);
 							System.out.println(String.format("Pattern Four - Common Objs - %s", value));
-						}
+					//	}
 					}
 				}
 			}catch(Exception e){

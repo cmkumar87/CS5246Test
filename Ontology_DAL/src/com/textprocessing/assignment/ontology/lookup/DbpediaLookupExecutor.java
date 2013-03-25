@@ -26,7 +26,7 @@ public class DbpediaLookupExecutor {
 		List<LookupContent> lookupContents = new ArrayList<LookupContent>();
 		try{
 			HttpResponse response = httpClient.execute(httpGet);
-			System.out.println(response.getStatusLine());
+			//System.out.println(response.getStatusLine());
 			HttpEntity entity = response.getEntity();
 			InputStream stream = entity.getContent();
 			 BufferedReader bReader = new BufferedReader(new InputStreamReader(stream));
@@ -41,11 +41,11 @@ public class DbpediaLookupExecutor {
              }
             
              String strContent = sbfFileContents.toString();
-             System.out.println(strContent);
+            // System.out.println(strContent);
              responseHandler.parseXmlContent(strContent.trim());
              List<String> lablesList = responseHandler.getAllValuesFromXmlBasedOnPattern("//ArrayOfResult/Result/Label/text()");
              lookupContents = getOtherDetails(lablesList);
-             System.out.println(lookupContents.toString());
+             //System.out.println(lookupContents.toString());
 		}catch(Exception e) {
 			System.out.println(e);
 			if(lookupContents.size() > 0){

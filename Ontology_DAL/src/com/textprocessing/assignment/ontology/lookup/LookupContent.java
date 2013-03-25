@@ -24,6 +24,12 @@ public class LookupContent {
 		if(classes != null && classes.size() > 0 && categories != null && categories.size() > 0 ){ 
 			content = String.format("Label - %s || URI - %s || Total Class - %s || Class_1 - %s || Class_2 - %s || Total Categories - %s || Categories_1 - %s || Count - %s\n", label,
 					URI, classes.size(), classes.get(0), classes.get(1), categories.size(), categories.get(0), refCount);
+		}else if (classes != null && classes.size() > 0) {
+			content = String.format("Label - %s || URI - %s || Total Class - %s || Class_1 - %s  || Count - %s\n", label,
+					URI, classes.size(), classes.get(0), refCount);
+		}else if(categories != null && categories.size() > 0 ){ 
+			content = String.format("Label - %s || URI - %s || Total Categories - %s || Categories_1 - %s || Count - %s\n", label,
+					URI, categories.size(), categories.get(0), refCount);
 		}else{
 			content = String.format("Label - %s || URI - %s || Count - %s\n", label,
 					URI, refCount);

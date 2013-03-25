@@ -32,7 +32,7 @@ public class XmlResponseHandler {
 	
 	
 	public HashMap<String, String> processXmlResponseContent(HashMap<String, String> xmlOperatorKeyandPatterns) throws ParserConfigurationException, XPathExpressionException, SAXException, IOException {
-		System.out.println(String.format("Process Xml response content - %s", xmlOperatorKeyandPatterns.toString()));
+		//System.out.println(String.format("Process Xml response content - %s", xmlOperatorKeyandPatterns.toString()));
 		Set<String> keyWords = xmlOperatorKeyandPatterns.keySet();
 		Iterator<String> keyWordsIterator = keyWords.iterator();
 		while (keyWordsIterator.hasNext()) {
@@ -45,7 +45,7 @@ public class XmlResponseHandler {
 	}
 	
 	public void parseXmlContent(String responseBodyAsString) throws ParserConfigurationException, SAXException, IOException {
-		System.out.println("Xpath parsing initiated");
+	//	System.out.println("Xpath parsing initiated");
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		factory.setNamespaceAware(true);
 		DocumentBuilder builder;

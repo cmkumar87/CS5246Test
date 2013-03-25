@@ -1,9 +1,6 @@
 package com.textprocessing.assignment.ontology.executor;
 
-import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
-import org.openrdf.repository.RepositoryException;
-import org.openrdf.repository.http.HTTPRepository;
 
 import com.textprocessing.assignment.ontology.executor.patterns.ExecutorLevelFour;
 import com.textprocessing.assignment.ontology.executor.patterns.ExecutorLevelOne;
@@ -12,24 +9,15 @@ import com.textprocessing.assignment.ontology.executor.patterns.IExecutorLevels;
 
 public class OntologyExecutor {
 	
-	private String sesameServer;
 	private RepositoryConnection con;
 	private IExecutorLevels executorLevels;
+	private OntologyConnector connector;
 
 	public OntologyExecutor(String sesameServer) {
-		this.sesameServer = sesameServer;
-		getConnection();
+		connector = new OntologyConnector(sesameServer);
+		con = connector.getConnection();
 	}
 	
-	private void getConnection() {
-		Repository myRepository = new HTTPRepository(sesameServer);
-		try {
-			myRepository.initialize();
-			con = myRepository.getConnection();
-		}catch(RepositoryException e){
-			System.err.println(e);
-		}
-	}
 	
 	public void processRequest(String entityOne, String entityTwo) {
 		boolean status = false;

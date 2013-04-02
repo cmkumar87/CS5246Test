@@ -11,7 +11,7 @@ import com.textprocessing.assignment.processor.DiversificationProcessor;
 
 public class DiversificationMain {
 	
-	private static final String FILE_NAME = "09.mq.topics.20001-60000.txt";
+	private static final String FILE_NAME = "09.mq.topics.20001-60000_10num.txt";
 
 	public void diversifyFromFile() throws Exception {
 		List<String> fileContent = readFile();
@@ -43,5 +43,6 @@ public class DiversificationMain {
 	public static void main(String[] args) throws Exception {
 		DiversificationMain main = new DiversificationMain();
 		main.diversifyFromFile();
+	//	main.diversifySearchQuery("obama family");
 	}
 }

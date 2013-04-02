@@ -13,12 +13,6 @@ import org.openrdf.repository.RepositoryConnection;
 
 public class DisamibiguityExecutor implements IDisambiguityExecutor{
 	
-	private String queryString = "SELECT DISTINCT ?obj " +
-			" WHERE { " +
-			" {   <http://dbpedia.org/resource/%s_(disambiguation)> dbpedia-owl:wikiPageDisambiguates ?obj   } " +
-			" union " +
-			" {   <http://dbpedia.org/resource/%s> dbpedia-owl:wikiPageDisambiguates ?obj   } " +
-			" }";
 
 	private String firstCharUpperCase(String word) {
 		StringBuffer upperCaseStr = new StringBuffer();
@@ -34,6 +28,13 @@ public class DisamibiguityExecutor implements IDisambiguityExecutor{
 
 	@Override
 	public List<String> processRequest(RepositoryConnection con, String entity) {
+		String queryString = "SELECT DISTINCT ?obj " +
+				" WHERE { " +
+				" {   <http://dbpedia.org/resource/%s_(disambiguation)> dbpedia-owl:wikiPageDisambiguates ?obj   } " +
+				" union " +
+				" {   <http://dbpedia.org/resource/%s> dbpedia-owl:wikiPageDisambiguates ?obj   } " +
+				" }";
+		
 		StringBuffer upperCaseStr = new StringBuffer();
 		if(entity != null){
 			String[] entities = entity.split(" ");

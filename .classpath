@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JenaLibs"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/StanfordNER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/StanfordPOSTagger"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/IllinoisNER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Wiki-Java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Factbook"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JTidy"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Apache HttpClient"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Argo"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

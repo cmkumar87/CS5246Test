@@ -3,8 +3,8 @@
 #################
 
 *.pydevproject
-.project
-.metadata
+#.project
+#.metadata
 bin/
 tmp/
 *.tmp
@@ -12,9 +12,9 @@ tmp/
 *.swp
 *~.nib
 local.properties
-.classpath
-.settings/
-.loadpath
+#.classpath
+#.settings/
+#.loadpath
 
 # External tool builders
 .externalToolBuilders/
@@ -23,10 +23,10 @@ local.properties
 *.launch
 
 # CDT-specific
-.cproject
+#.cproject
 
 # PDT-specific
-.buildpath
+#.buildpath
 
 
 #################

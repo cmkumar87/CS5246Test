@@ -7,7 +7,7 @@ public class NERProcessor
 {
 	public static void main(String[] args) throws IOException
 	{
-		String inPath = "test_files/output-processedMQ.3class.txt";
+		String inPath = "Other_Projects/test_files/output-processedMQ.3class.txt";
 		String outPath = inPath;
 		
 		FileReader fileIn = new FileReader(inPath);

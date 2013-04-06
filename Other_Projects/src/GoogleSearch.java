@@ -1,4 +1,8 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -47,6 +51,20 @@ public class GoogleSearch implements Comparable<GoogleSearch>
 			conn.setRequestProperty("Accept", "application/json");
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			
+			File f = new File("Other_Projects/search_result");
+			BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+			String output;
+			while ((output = br.readLine()) != null)
+			{
+				bw.write(output);
+			}
+			
+			bw.close();
+			conn.disconnect();
+			br.close();
+			
+			br = new BufferedReader(new FileReader(f));
+			
 			JdomParser jParser = new JdomParser();
 			try
 			{
@@ -72,7 +90,6 @@ public class GoogleSearch implements Comparable<GoogleSearch>
 				return false;
 			}
 			
-			conn.disconnect();
 			br.close();
 		}
 		catch (MalformedURLException e)

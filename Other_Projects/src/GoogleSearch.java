@@ -34,7 +34,7 @@ public class GoogleSearch implements Comparable<GoogleSearch>
 	public boolean search(String q)
 	{
 		q = q.replaceAll(" ", "+");
-		String urlString = "http://www.googleapis.com/customsearch/v1?key=" + apiKey + "&cx=" + cx + "&q=" + q + "&alt=json";
+		String urlString = "https://www.googleapis.com/customsearch/v1?key=" + apiKey + "&cx=" + cx + "&q=" + q + "&alt=json";
 		
 		System.out.println("urlString : " + urlString);
 		

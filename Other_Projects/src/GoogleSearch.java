@@ -17,8 +17,9 @@ import argo.saj.InvalidSyntaxException;
 
 public class GoogleSearch implements Comparable<GoogleSearch>
 {
-	private String apiKey;
-	private String cx;
+	private final String FILE_PATH = "api_keys.txt";
+	
+	private ArrayList<ApiKey> apiKeys;
 	private String query;
 	private int totalResults;
 	private ArrayList<String> topK;
@@ -26,21 +27,33 @@ public class GoogleSearch implements Comparable<GoogleSearch>
 	
 	public GoogleSearch(String q)
 	{
-		apiKey = "AIzaSyCWXn-c6G3836KEoMMrbclToOrIe7o6f84";
-		cx = "001668935086444843946:fgb7egnnumk";
+		try
+		{
+			apiKeys = getApiFromFile(FILE_PATH);
+		}
+		catch (IOException e)
+		{
+			System.out.println("Could not open file \"" + FILE_PATH + "\".");
+			e.printStackTrace();
+		}
 		query = q;
 		totalResults = 0;
 		topK = new ArrayList<String>();
 		score = 0;
+		
 		search(query);
 	}
 	
-	public boolean search(String q)
+	private void search(String q)
 	{
+		int i = 0;
+		String apiKey = apiKeys.get(i).getApi();
+		String cx = apiKeys.get(i).getCx();
 		q = q.replaceAll(" ", "+");
 		String urlString = "https://www.googleapis.com/customsearch/v1?key=" + apiKey + "&cx=" + cx + "&q=" + q + "&alt=json";
-		
-		System.out.println("urlString : " + urlString);
+		// use &start=index to get to next page
+		// e.g. if current pages has 10 results, specify &start=11 to get results from next page
+		System.out.print("Connecting to " + urlString + "... ");
 		
 		try
 		{
@@ -49,9 +62,34 @@ public class GoogleSearch implements Comparable<GoogleSearch>
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Accept", "application/json");
+			
+			while (i < apiKeys.size() && conn.getResponseCode() == 403)
+			{
+				System.out.println("connection failed");
+				i++;
+				if (i == apiKeys.size())
+				{
+					System.out.println("All API keys out of query quota.");
+					return;
+				}
+				apiKey = apiKeys.get(i).getApi();
+				cx = apiKeys.get(i).getCx();
+				urlString = "https://www.googleapis.com/customsearch/v1?key=" + apiKey + "&cx=" + cx + "&q=" + q + "&alt=json";
+				// use &start=index to get to next page
+				// e.g. if current pages has 10 results, specify &start=11 to get results from next page
+				System.out.print("Connecting to " + urlString + "... ");
+				
+				url = new URL(urlString);
+				conn = (HttpURLConnection) url.openConnection();
+				conn.setRequestMethod("GET");
+				conn.setRequestProperty("Accept", "application/json");
+			}
+			
+			System.out.println("connected");
+			
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			
-			File f = new File("Other_Projects/search_result");
+			File f = new File("search_result");
 			BufferedWriter bw = new BufferedWriter(new FileWriter(f));
 			String output;
 			while ((output = br.readLine()) != null)
@@ -87,23 +125,29 @@ public class GoogleSearch implements Comparable<GoogleSearch>
 			catch (InvalidSyntaxException e)
 			{
 				e.printStackTrace();
-				return false;
+				//return false;
 			}
 			
+			conn.disconnect();
 			br.close();
 		}
 		catch (MalformedURLException e)
 		{
 			e.printStackTrace();
-			return false;
+			//return false;
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
-			return false;
+			//return false;
 		}
 		
-		return true;
+		//return true;
+	}
+	
+	public ArrayList<ApiKey> getApiKeys()
+	{
+		return apiKeys;
 	}
 	
 	public String getQuery()
@@ -135,6 +179,25 @@ public class GoogleSearch implements Comparable<GoogleSearch>
 	public int compareTo(GoogleSearch gs)
 	{
 		return gs.getScore() - score;
+	}
+	
+	private ArrayList<ApiKey> getApiFromFile(String path) throws IOException
+	{
+		ArrayList<ApiKey> apiKeys = new ArrayList<ApiKey>();
+		
+		File f = new File(path);
+		BufferedReader br = new BufferedReader(new FileReader(f));
+		
+		String output;
+		while ((output = br.readLine()) != null)
+		{
+			String api = output.split(" ")[0];
+			String cx = output.split(" ")[1];
+			
+			apiKeys.add(new ApiKey(api, cx));
+		}
+		
+		return apiKeys;
 	}
 	
 	/*

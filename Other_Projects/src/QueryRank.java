@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class QueryRank
 {
@@ -10,7 +11,7 @@ public class QueryRank
 		gsList = new ArrayList<GoogleSearch>();
 	}
 	
-	public QueryRank(ArrayList<String> queryList)
+	public QueryRank(List<String> queryList)
 	{
 		gsList = new ArrayList<GoogleSearch>();
 		for (int i = 0; i < queryList.size(); i++)
@@ -61,11 +62,15 @@ public class QueryRank
 					if (reformulatedResults.get(j).equals(originalResults.get(k)))
 					{
 						matches++;
-						//problem with matchRankSum
+						// rank is set as 0, 1, ..., k-1
+						// so if total results = 10 and there is a match in the last document,
+						// then matchRankSum += 1
 						matchRankSum += originalResults.size() - k;
 					}
 				}
 			}
+			if (matches == 0) score = 0;
+			else score *= 1.0 / matches * matchRankSum;
 			gsList.get(i).setScore(score);
 		}
 		Collections.sort(gsList);

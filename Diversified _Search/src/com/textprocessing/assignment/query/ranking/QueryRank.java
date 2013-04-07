@@ -63,11 +63,15 @@ public class QueryRank
 					if (reformulatedResults.get(j).equals(originalResults.get(k)))
 					{
 						matches++;
-						//problem with matchRankSum
+						// rank is set as 0, 1, ..., k-1
+						// so if total results = 10 and there is a match in the last document,
+						// then matchRankSum += 1
 						matchRankSum += originalResults.size() - k;
 					}
 				}
 			}
+			if (matches == 0) score = 0;
+			else score *= 1.0 / matches * matchRankSum;
 			gsList.get(i).setScore(score);
 		}
 		Collections.sort(gsList);

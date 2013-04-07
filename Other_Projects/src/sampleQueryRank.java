@@ -16,10 +16,10 @@ public class sampleQueryRank
 		QueryRank qr1 = new QueryRank(queryList);
 		
 		// 2.
-		QueryRank qr2 = new QueryRank();
-		qr2.addQuery("country sentosa");
-		qr2.addQuery("singapore sentosa");
-		qr2.addQuery("singapore tourist destination");
+		//QueryRank qr2 = new QueryRank();
+		//qr2.addQuery("country sentosa");
+		//qr2.addQuery("singapore sentosa");
+		//qr2.addQuery("singapore tourist destination");
 		
 		// Retrieving ranked list:
 		ArrayList<String> rankedList;
@@ -34,12 +34,11 @@ public class sampleQueryRank
 		
 		// Call getRankedQueriesFormula2() to get ranked list of queries using second formula.
 		// This method takes in the original query string as parameter.
-		// (not working currently)
-		//rankedList = qr2.getRankedQueriesFormula2("singapore sentosa");
-		//System.out.println("Ranking based on second formula: ");
-		//for (int i = 0; i < rankedList.size(); i++)
-		//{
-		//	System.out.println(rankedList.get(i));
-		//}
+		rankedList = qr1.getRankedQueriesFormula2("singapore sentosa");
+		System.out.println("Ranking based on second formula: ");
+		for (int i = 0; i < rankedList.size(); i++)
+		{
+			System.out.println(rankedList.get(i));
+		}
 	}
 }

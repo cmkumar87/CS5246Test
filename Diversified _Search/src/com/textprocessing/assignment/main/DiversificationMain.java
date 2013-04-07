@@ -47,7 +47,7 @@ public class DiversificationMain {
 
 	public static void main(String[] args) throws Exception {
 		DiversificationMain main = new DiversificationMain();
-		main.diversifyFromFile();
-	//	main.diversifySearchQuery("obama family");
+	//	main.diversifyFromFile();
+		main.diversifySearchQuery("kcs");
 	}
 }

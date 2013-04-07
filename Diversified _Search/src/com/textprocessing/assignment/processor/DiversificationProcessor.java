@@ -250,9 +250,33 @@ public class DiversificationProcessor {
 		return indiObj;
 	}
 	
+	private String convertUpperIfSingleToken(String searchQuery) {
+
+		StringBuffer strBuf = new StringBuffer();
+
+		for (int i = 0; i < searchQuery.length(); i++) {
+			strBuf.append(Character.toUpperCase(searchQuery.charAt(i)));
+		}
+		return strBuf.toString();
+
+	}
+	
 	private List<String> getDisambiquityResults(String searchQuery) {
 		disambiguityExecutor = new DisamibiguityExecutor();
-		List<String> objs = disambiguityExecutor.processRequest(con, searchQuery);
+		String[] tokens = searchQuery.split(" ");
+		List<String> objs = new ArrayList<String>();
+		if(tokens.length == 1){
+			String refacSearchQuery = convertUpperIfSingleToken(searchQuery);
+			objs = disambiguityExecutor.processRequest(con, refacSearchQuery);
+			if(objs == null || objs.size() == 0){
+				System.out.println("Disambiquity with upper case - failure | " + refacSearchQuery);
+				objs = disambiguityExecutor.processRequest(con, searchQuery);
+			}else{
+				System.out.println("Disambiquity with upper case - Success | " + refacSearchQuery);
+			}
+		}else{
+			objs = disambiguityExecutor.processRequest(con, searchQuery);
+		}
 		return objs;
 	}
 	

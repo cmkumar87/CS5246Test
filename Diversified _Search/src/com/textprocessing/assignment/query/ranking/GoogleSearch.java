@@ -113,14 +113,17 @@ public class GoogleSearch implements Comparable<GoogleSearch>
 				JsonNode searchInfo = rootNode.getNode("searchInformation");
 				totalResults = Integer.parseInt(searchInfo.getStringValue("totalResults"));
 				
-				// Get links of top ten results.
-				JsonNode items = rootNode.getNode("items");
-				int index = 0;
-				while (items.isObjectNode(index))
+				if (totalResults > 0)
 				{
-					JsonNode result = items.getNode(index);
-					topK.add(result.getStringValue("link"));
-					index++;
+					// Get links of top ten results.
+					JsonNode items = rootNode.getNode("items");
+					int index = 0;
+					while (items.isObjectNode(index))
+					{
+						JsonNode result = items.getNode(index);
+						topK.add(result.getStringValue("link"));
+						index++;
+					}
 				}
 			}
 			catch (InvalidSyntaxException e)

@@ -214,6 +214,8 @@ public class DiversificationProcessor {
 					}
 					//	System.out.println(String.format("Query Token - %s | Content - %s", tokenizedQuery[i], contentDetails.toString()));
 				}
+			}else{
+				objs.addAll(indiObjsAll);
 			}
 			System.out.println("Lookup reformulation result for search query - " + firstLevel[firstLevel.length - 1] + "\n" +objs.toString());
 		}

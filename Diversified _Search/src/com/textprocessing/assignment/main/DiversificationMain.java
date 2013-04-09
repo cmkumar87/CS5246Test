@@ -48,6 +48,6 @@ public class DiversificationMain {
 	public static void main(String[] args) throws Exception {
 		DiversificationMain main = new DiversificationMain();
 	//	main.diversifyFromFile();
-		main.diversifySearchQuery("microsoft office");
+		main.diversifySearchQuery("sachin tendulkar");
 	}
 }

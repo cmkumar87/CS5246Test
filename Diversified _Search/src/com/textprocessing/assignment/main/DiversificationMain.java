@@ -26,10 +26,10 @@ public class DiversificationMain {
 	public void diversifySearchQuery(String searchQuery) throws Exception {
 		DiversificationProcessor processor = new DiversificationProcessor();
 		List<String> objs = processor.diversifySearchQuery(searchQuery);
-		QueryRank rank = new QueryRank(objs);
+	/*	QueryRank rank = new QueryRank(objs);
 		List<String> rankedObjs = rank.getRankedQueriesFormula1();
 		System.out.println("Ranked queries - \n"+rankedObjs.toString() );
-		System.out.println("\n************END*********************\n");
+		System.out.println("\n************END*********************\n");*/
 	}
 
 	private List<String> readFile() throws IOException {
@@ -48,6 +48,6 @@ public class DiversificationMain {
 	public static void main(String[] args) throws Exception {
 		DiversificationMain main = new DiversificationMain();
 	//	main.diversifyFromFile();
-		main.diversifySearchQuery("kcs");
+		main.diversifySearchQuery("microsoft office");
 	}
 }

@@ -1,6 +1,7 @@
 package com.textprocessing.assignment.processor;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -189,17 +190,30 @@ public class DiversificationProcessor {
 			objs = processSearchForCategory(firstLevel[firstLevel.length - 1]);
 		}if(objs == null || objs.size() == 0){
 			System.out.println(String.format("NO categories for search query and bigrams of searc query - %s | Proceeding with lookups", firstLevel[firstLevel.length - 1]));
-			String[] tokenizedQuery = tokenizeSearchQuery(searchQuery);
-			for (int i = 0; i < tokenizedQuery.length; i++) {
-				lookupExecutor = new DbpediaLookupExecutor();
-				List<LookupContent> contentDetails = lookupExecutor.processHttpGet(tokenizedQuery[i]);
-				List<String> indiObjs = getClassCate(contentDetails, tokenizedQuery[i], firstLevel[firstLevel.length - 1]);
-				if (indiObjs == null || indiObjs.size() == 0) {
-					System.out.println(String.format("Search Token - %s is NOT an entity", tokenizedQuery[i]));
-				}else{
-					objs.addAll(indiObjs);
+			//String[] tokenizedQuery = tokenizeSearchQuery(searchQuery);
+			lookupExecutor = new DbpediaLookupExecutor();
+			List<LookupContent> contentDetailsAll = lookupExecutor.processHttpGet(searchQuery);
+			List<String> indiObjsAll = getClassCateForLookup(contentDetailsAll, searchQuery, "%s");
+			if(indiObjsAll == null || indiObjsAll.size() == 0){
+				System.out.println(String.format("NO categories for whole search query lookup - %s | Proceeding with lookups bigrams", firstLevel[firstLevel.length - 1]));
+				List<String> tokens = removePerpositions(searchQuery);
+				List<String> cleanedToken = cleanUpTokens(tokens);
+				Map<String, String> bigramTokensMap = frameBigramQueries(cleanedToken);
+				Map<String, String> upperCasedBigrams = upperCaseUnderScoreAll(bigramTokensMap);
+				Set<String> keySet = upperCasedBigrams.keySet();
+				Iterator<String> keySetItr = keySet.iterator();
+				while(keySetItr.hasNext()){
+					String remainPart = keySetItr.next();
+					String bigram = upperCasedBigrams.get(remainPart);
+					List<LookupContent> contentDetails = lookupExecutor.processHttpGet(bigram);
+					List<String> indiObjs = getClassCateForLookup(contentDetails, bigram, remainPart);
+					if (indiObjs == null || indiObjs.size() == 0) {
+						System.out.println(String.format("Search Token - %s is NOT an entity", bigram));
+					}else{
+						objs.addAll(indiObjs);
+					}
+					//	System.out.println(String.format("Query Token - %s | Content - %s", tokenizedQuery[i], contentDetails.toString()));
 				}
-			//	System.out.println(String.format("Query Token - %s | Content - %s", tokenizedQuery[i], contentDetails.toString()));
 			}
 			System.out.println("Lookup reformulation result for search query - " + firstLevel[firstLevel.length - 1] + "\n" +objs.toString());
 		}
@@ -210,16 +224,47 @@ public class DiversificationProcessor {
 	private List<String> getClassCate(List<LookupContent> contentDetails, String token, String searchQuery) {
 		Iterator<LookupContent> lookupItr = contentDetails.iterator();
 		List<String> objs = new ArrayList<String>();
+		
 		while (lookupItr.hasNext()) {
 			LookupContent lookupContent = (LookupContent) lookupItr.next();
-			if (lookupContent.getCategories() != null && lookupContent.getCategories().size() > 0) {
-				for (int i = 0; i < lookupContent.getCategories().size(); i++) {
-					String category = lookupContent.getCategories().get(i).replace("http://dbpedia.org/resource/Category:", "");
-					objs.add(searchQuery.replace(token, category).replace("_", " ").replace("-", " "));
+			if(lookupContent.getClasses() != null && lookupContent.getClasses().size() > 0) {
+				if(lookupContent.getClasses().contains("http://dbpedia.org/ontology/Place") || lookupContent.getClasses().contains("http://dbpedia.org/ontology/Person")){
+				if (lookupContent.getCategories() != null && lookupContent.getCategories().size() > 0) {
+					for (int i = 0; i < lookupContent.getCategories().size(); i++) {
+						String category = lookupContent.getCategories().get(i).replace("http://dbpedia.org/resource/Category:", "");
+
+						objs.add(searchQuery.replace(token, category).replace("_", " ").replace("-", " "));
+					}
+					//System.out.println(String.format("Search Token - %s is an entity | categories - %s ",token, lookupContent.getCategories().get(0)));
+					//return true;
 				}
-				//System.out.println(String.format("Search Token - %s is an entity | categories - %s ",token, lookupContent.getCategories().get(0)));
-				//return true;
 			}
+		}
+		}
+		//System.out.println(String.format("Search Token - %s is an entity | reformulated - %s ",token, objs));
+		return objs;
+	}
+	
+	
+	private List<String> getClassCateForLookup(List<LookupContent> contentDetails, String token, String searchQuery) {
+		Iterator<LookupContent> lookupItr = contentDetails.iterator();
+		List<String> objs = new ArrayList<String>();
+		
+		while (lookupItr.hasNext()) {
+			LookupContent lookupContent = (LookupContent) lookupItr.next();
+			if(lookupContent.getClasses() != null && lookupContent.getClasses().size() > 0) {
+				if(lookupContent.getClasses().contains("http://dbpedia.org/ontology/Place") || lookupContent.getClasses().contains("http://dbpedia.org/ontology/Person")){
+				if (lookupContent.getCategories() != null && lookupContent.getCategories().size() > 0) {
+					for (int i = 0; i < lookupContent.getCategories().size(); i++) {
+						String category = lookupContent.getCategories().get(i).replace("http://dbpedia.org/resource/Category:", "");
+
+						objs.add(String.format(searchQuery, category).replace("_", " ").replace("-", " "));
+					}
+					//System.out.println(String.format("Search Token - %s is an entity | categories - %s ",token, lookupContent.getCategories().get(0)));
+					//return true;
+				}
+			}
+		}
 		}
 		//System.out.println(String.format("Search Token - %s is an entity | reformulated - %s ",token, objs));
 		return objs;

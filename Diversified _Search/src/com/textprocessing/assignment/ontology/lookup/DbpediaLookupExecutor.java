@@ -3,6 +3,7 @@ package com.textprocessing.assignment.ontology.lookup;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,6 +20,7 @@ public class DbpediaLookupExecutor {
 	private XmlResponseHandler responseHandler;
 
 	public List<LookupContent> processHttpGet(String keyWord) throws Exception {
+		keyWord = URLEncoder.encode(keyWord, "UTF-8");
 		String url = "http://lookup.dbpedia.org/api/search.asmx/PrefixSearch?QueryClass=&MaxHits=5&QueryString=" + keyWord;
 		DefaultHttpClient httpClient = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet(url);

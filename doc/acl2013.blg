@@ -1,7 +1,7 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: acl2013.aux
 The style file: acl.bst
 Database file #1: acl2013.bib
-Warning--I didn't find a database entry for "Gusfield:97"
-Warning--I didn't find a database entry for "APA:83"
-Warning--I didn't find a database entry for "ACM:83"
-(There were 3 warnings)
+A bad cross reference---entry "DBLP:conf/cikm/Pasca07a"
+refers to entry "DBLP:conf/cikm/2007", which doesn't exist
+Warning--I didn't find a database entry for "DBLP:conf/cikm/2007"
+(There was 1 error message)

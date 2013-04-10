@@ -1,10 +1,102 @@
 \begin{thebibliography}{}
 
-\bibitem[\protect\citename{Newman}2004]{newman2004coauthorship}
-Mark~EJ Newman.
-\newblock 2004.
-\newblock Coauthorship networks and patterns of scientific collaboration.
-\newblock {\em Proceedings of the National Academy of Sciences of the United
-  States of America}, 101(Suppl 1):5200--5205.
+\bibitem[\protect\citename{Agrawal \bgroup et al.\egroup
+  }2009]{agrawal2009diversifying}
+Rakesh Agrawal, Sreenivas Gollapudi, Alan Halverson, and Samuel Ieong.
+\newblock 2009.
+\newblock Diversifying search results.
+\newblock In {\em Proceedings of the Second ACM International Conference on Web
+  Search and Data Mining}, pages 5--14. ACM.
+
+\bibitem[\protect\citename{Auer \bgroup et al.\egroup }2007]{auer2007dbpedia}
+S{\"o}ren Auer, Christian Bizer, Georgi Kobilarov, Jens Lehmann, Richard
+  Cyganiak, and Zachary Ives.
+\newblock 2007.
+\newblock Dbpedia: A nucleus for a web of open data.
+\newblock In {\em The semantic web}, pages 722--735. Springer.
+
+\bibitem[\protect\citename{Bhatia \bgroup et al.\egroup
+  }2012]{bhatia2012analysis}
+Sumit Bhatia, Cliff Brunk, and Prasenjit Mitra.
+\newblock 2012.
+\newblock Analysis and automatic classification of web search queries for
+  diversification requirements.
+\newblock {\em Proceedings of the American Society for Information Science and
+  Technology}, 49(1):1--10.
+
+\bibitem[\protect\citename{Bunescu and Pasca}2006]{bunescu2006using}
+Razvan Bunescu and Marius Pasca.
+\newblock 2006.
+\newblock Using encyclopedic knowledge for named entity disambiguation.
+\newblock In {\em Proceedings of EACL}, volume~6, pages 9--16.
+
+\bibitem[\protect\citename{Cucerzan}2007]{cucerzan2007large}
+Silviu Cucerzan.
+\newblock 2007.
+\newblock Large-scale named entity disambiguation based on wikipedia data.
+\newblock In {\em Proceedings of EMNLP-CoNLL}, volume~6, pages 708--716.
+
+\bibitem[\protect\citename{Finkel \bgroup et al.\egroup
+  }2005]{finkel2005incorporating}
+Jenny~Rose Finkel, Trond Grenager, and Christopher Manning.
+\newblock 2005.
+\newblock Incorporating non-local information into information extraction
+  systems by gibbs sampling.
+\newblock In {\em Proceedings of the 43rd Annual Meeting on Association for
+  Computational Linguistics}, pages 363--370. Association for Computational
+  Linguistics.
+
+\bibitem[\protect\citename{Gollapudi and Sharma}2009]{gollapudi2009axiomatic}
+Sreenivas Gollapudi and Aneesh Sharma.
+\newblock 2009.
+\newblock An axiomatic approach for result diversification.
+\newblock In {\em Proceedings of the 18th international conference on World
+  wide web}, pages 381--390. ACM.
+
+\bibitem[\protect\citename{Guo \bgroup et al.\egroup }2009]{guo2009named}
+Jiafeng Guo, Gu~Xu, Xueqi Cheng, and Hang Li.
+\newblock 2009.
+\newblock Named entity recognition in query.
+\newblock In {\em Proceedings of the 32nd international ACM SIGIR conference on
+  Research and development in information retrieval}, pages 267--274. ACM.
+
+\bibitem[\protect\citename{Pasca}2007]{DBLP:conf/cikm/Pasca07a}
+Marius Pasca.
+\newblock 2007.
+\newblock Weakly-supervised discovery of named entities using web search
+  queries.
+\newblock In {\em CIKM}, pages 683--690.
+
+\bibitem[\protect\citename{Ratinov and Roth}2009]{ratinov2009design}
+Lev Ratinov and Dan Roth.
+\newblock 2009.
+\newblock Design challenges and misconceptions in named entity recognition.
+\newblock In {\em Proceedings of the Thirteenth Conference on Computational
+  Natural Language Learning}, pages 147--155. Association for Computational
+  Linguistics.
+
+\bibitem[\protect\citename{Santos \bgroup et al.\egroup
+  }2010a]{santos2010exploiting}
+Rodrygo~LT Santos, Craig Macdonald, and Iadh Ounis.
+\newblock 2010a.
+\newblock Exploiting query reformulations for web search result
+  diversification.
+\newblock In {\em Proceedings of the 19th international conference on World
+  wide web}, pages 881--890. ACM.
+
+\bibitem[\protect\citename{Santos \bgroup et al.\egroup
+  }2010b]{santos2010selectively}
+Rodrygo~LT Santos, Craig Macdonald, and Iadh Ounis.
+\newblock 2010b.
+\newblock Selectively diversifying web search results.
+\newblock In {\em Proceedings of the 19th ACM international conference on
+  Information and knowledge management}, pages 1179--1188. ACM.
+
+\bibitem[\protect\citename{Santos \bgroup et al.\egroup
+  }2010c]{santos2010explicit}
+Rodrygo~LT Santos, Jie Peng, Craig Macdonald, and Iadh Ounis.
+\newblock 2010c.
+\newblock Explicit search result diversification through sub-queries.
+\newblock In {\em Advances in information retrieval}, pages 87--99. Springer.
 
 \end{thebibliography}

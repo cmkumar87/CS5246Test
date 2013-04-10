@@ -1,7 +1,32 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: acl2013.aux
 The style file: acl.bst
 Database file #1: acl2013.bib
+Warning--entry type for "wiki:Online" isn't style-file defined
+--line 159 of file acl2013.bib
+Warning--entry type for "wikicat:Online" isn't style-file defined
+--line 164 of file acl2013.bib
+Warning--entry type for "wikidisamb:Online" isn't style-file defined
+--line 169 of file acl2013.bib
+Warning--entry type for "dbpedia:lookup" isn't style-file defined
+--line 174 of file acl2013.bib
+I was expecting a `,' or a `}'---line 176 of file acl2013.bib
+ : 
+ : url = {http://lookup.dbpedia.org/api/search.asmx/KeywordSearch?QueryClass=place&QueryString=}
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
 A bad cross reference---entry "DBLP:conf/cikm/Pasca07a"
 refers to entry "DBLP:conf/cikm/2007", which doesn't exist
 Warning--I didn't find a database entry for "DBLP:conf/cikm/2007"
-(There was 1 error message)
+Warning--to sort, need author or key in wiki:Online
+Warning--to sort, need author or key in wikidisamb:Online
+Warning--to sort, need author or key in wikicat:Online
+Warning--to sort, need author or key in dbpedia:lookup
+`year' is a missing field, not a string, for entry dbpedia:lookup
+while executing---line 1314 of file acl.bst
+`year' is a missing field, not a string, for entry wikicat:Online
+while executing---line 1314 of file acl.bst
+`year' is a missing field, not a string, for entry wiki:Online
+while executing---line 1314 of file acl.bst
+`year' is a missing field, not a string, for entry wikidisamb:Online
+while executing---line 1314 of file acl.bst
+(There were 6 error messages)

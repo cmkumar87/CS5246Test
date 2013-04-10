@@ -45,60 +45,59 @@ web search queries}
 \label{intro}
 Web informational retrieval by commercial search engines focus on 
 satisfying information needs of a majority of its users. So, they 
-focus on retrieving documents relevant to the most popular interpretation(s) 
-of web search queries. They rely on their dynamic query logs to constantly tune their 
-search results to adapt to the changes in perceptions of the user. Given the
-fairly mature approaches in this field for retrieving relevant documents 
-recent research has focussed on more sophisticated aspects such as addressing 
+strategize on retrieving documents relevant to the most popular interpretation(s) 
+of web search queries. They rely on their dynamic query logs to constantly tune 
+their search results to adapt to changes in perceptions of the user. Given 
+the fairly mature approaches in this field for retrieving relevant documents, 
+recent research has shifted focus on more sophisticated aspects such as addressing 
 the implicit information needs of the user by extrapolating from the explicit 
-information in the search query. Drawing additional information from a user's geographic 
-location and personal profiles of the user collected by encouraging user registration 
-personalization being the most popular extensions to the standard retrieval methods. 
-Although finding the broad geographic location of a user is fairly easy, profiling a
-user based on his search queries requires logging a considerable number of his queries 
-over longer time periods. 
+information in the search query. Standard retrieval methods have been extended to 
+draw additional information from a user's geographic location \cite{lu2010personalize} 
+and personal profiles of the user \cite{teevan2005personalizing} collected by 
+encouraging user registration and personalization. Although finding the broad 
+geographic location of a user is fairly easy, profiling a user based on his search 
+queries requires logging a considerable number of his queries over longer time periods.
 
 To present a diverse list of search results is one alternative when there is lack 
 of information specific enough to facilitate retrieval that accurately satisfies the 
 users' information needs. Presenting a diverse list of documents as the search result 
 of a query enables web search engines to address the information needs of a wider 
-audience. The quantum of diversity in the search results may depend mainly on the 
-interpretations of the named entities in the query.
-% citation
-Such interpretations are governed by their ambiguities and facets.
+audience \cite{bhatia2012analysis}. Inclusion of diversity as a parameter to retrieve 
+and rank search results warrants additional considerations. The traditional probabilistic 
+ranking principle purely based on relevance would be sub-optimal\cite{gollapudi2009axiomatic}. 
+More often than not, diversity in search results require a trade-off against relevance.
 
 \subsection{Types of Diversity}
-Although ... agree diversity stems from lack of enough information, variety 
-can be introduced into the query results by diversification along different 
-lines. Providing search results corresponding to the unambiguous forms of an 
-ambiguous query gives semantic diversity \cite{gollapudi2009axiomatic}. For 
-example, an user issuing a query, 'Jaguar' could intend to find information on 
-'Jaguar, the wild cat' or 'Jaguar, the sports car'. Query results on different 
-topics of a search query provides topical diversity. For example, an user with 
-a query on 'Barrack Obama', assuming the reference is to the 'Barrack Hussain 
-Obama', President of the United States of America, topical diversity could be 
-provided by search results on 'Barrack Obama on being a Nobel Peace prize winner' 
-or 'Barrack Obama, an American political leader with African lineage'. In our 
-method, we prioritize semantic diversity through disambiguation over topical 
-diversity through categorization.
+\label{types}
+Although important works in search result diversification such as \cite{agrawal2009diversifying}, 
+\cite{santos2010explicit} agree that diversity stems from lack of enough information, 
+it is important to realise that variety can be introduced into the query results by 
+considering different basis for diversification . \cite{gollapudi2009axiomatic} provide a 
+comprehensive set of axioms, only a proper subset of which any diversification algorithm 
+would satisfy. Providing search results corresponding to the unambiguous forms of 
+an ambiguous query gives semantic diversity. For example, an user issuing a query, 
+`Jaguar' could intend to find information on `Jaguar, the wild cat' or `Jaguar, 
+the sports car' or `Jaguar the operating system'. Query results on different topics 
+of a search query provides topical diversity. For example, an user with the query 
+`Barrack Obama', assuming the reference is to the `Barrack Hussain Obama', President 
+of the United States of America, could be provided with topical diversity through 
+search results on `Barrack Obama on being a Nobel Peace prize winner' or `Barrack 
+Obama, an American political leader with African lineage'. In our method, we prioritize 
+semantic diversity through disambiguation over topical diversity through categorization.
 
+We note that these various aspects may depend mainly on the interpretations of the 
+named entities in the query. Interpretations are governed by ambiguities and 
+facets of the named entities. Ambiguities and facets of a named entity depends on 
+the level of detail encoded in the query. This leads us to the thought that not 
+all queries need diversification and the quantum of diversity would depend on the 
+query and the entities in the query.
  
-\cite{santos2010explicit}
-\cite{santos2010selectively}
-\cite{bhatia2012analysis}
-
-\section{Motivation and Related work}
-
-\cite{agrawal2009diversifying} describe an algorithm to provide diverse search results for
-ambiguous queries. \cite{santos2010exploiting} present a framework to identify unspecified
-information needs of underspecified queries to provide a diverse list of search results. We
-propose to build on these works by identifying unspecified relations among named entities
-in a query to diversify the search results.
-The remainder of this paper is organized as follows.
+%\cite{santos2010selectively}
+%\cite{bhatia2012analysis}
 
 \subsection{Named Entity Recognition in Queries(NERQ)}
-\cite{guo2009named} \cite{DBLP:conf/cikm/Pasca07a} claim a 
-significant portion of web search queries to contain named entities.
+\cite{guo2009named} \cite{DBLP:conf/cikm/Pasca07a} claim that a 
+significant portion of web search queries contain named entities.
 \cite{guo2009named} found that 70\% of queries from the query logs of a 
 commercial search engine to contain named entities. Thus recognising named 
 entities becomes valuable in interpreting the semantics of a web search 
@@ -115,76 +114,102 @@ today such as \cite{finkel2005incorporating} and \cite{ratinov2009design} rely
 on automatic sequence labelling using Conditional Random Fields(CRF) it fails 
 miserably on the much shorter web search queries. \cite{bunescu2006using} show 
 a method to extract named entities with the help of encyclopaedia text such as 
-Wikipedia pages using heuristics on the full text content of the pages.
+Wikipedia pages using heuristics on the full text content of the pages. 
+Dbpedia \cite{auer2007dbpedia} is a resource that harvests structured 
+content in Wikipedia and provides it in machine-readable form. In our methods we 
+extensively use dbpedia to leverage on the crowd-sourced content 
+from Wikipedia to recognise named entities and find diversified versions of the 
+original search query.
 
+\section{Related works}
+
+\cite{agrawal2009diversifying} describe an algorithm to provide diverse search 
+results for ambiguous queries. They assume a taxonomy to build their solution.
+\cite{santos2010exploiting} present a framework to identify unspecified information 
+needs of underspecified queries to provide a diverse list of search results. 
+\cite{cucerzan2007large} uses Wikipedia \cite{wiki:Online} to do large scale entity 
+disambiguation. \cite{hoffart2011robust} uses dbpedia among other knowledge bases to 
+disambiguate named entities. We propose to build on these works by identifying 
+unspecified relations among named entities in a query to diversify the search results. 
+In the remainder of this paper we describe our methods in Section~\ref{sec:method}.
+%and report on our results in Section~\ref{sec:results}.
 
 \section{Method}
-Search is verified for ambiguous interpretations \cite{cucerzan2007large} through 
+\label{sec:method}
+As mentioned earlier in Section~\ref{types}, we start with analysing the user search-
+query form ambiguity. We consider the search query as a whole and check for Wikipedia
+Disambiguation pages \cite{wikidisamb:Online} through dbpedia's SPARQL end-point 
+service. If we find the query considered whole is ambiguous, the reformulations 
+of the query are the different disambiguation pages that Wikipedia points to. This part 
+handles the semantic ambiguity of the query.
 
-\cite{DBLP:conf/cikm/Pasca07a}
+If the query is not ambiguous, we check if it is a category under wikipedia category hierarchy
+\cite{wikicat:Online}. If it is a category, then we retrieve all the sub-categories of the 
+category as possible reformulations. We interpret that these subtopics represent the different 
+sub-topics of the query. This part handles the topical diversity of the search query.
 
-\cite{auer2007dbpedia}
-\label{sect:method}
+Our method attempts to maximize the utility from the semantics of the complete query before 
+analysing its parts. We aim to include elements of generalization to the overall search results 
+since we assume that the user is not completely aware of his information need and is rather 
+exploring his way through the search. If we fail to detect a match in disambiguation and the 
+category pages, we clean the query of prepositions,infinitives and other stopwords and break them 
+into many bigrams. We again attempt to match the bigrams to the category hierarchy. If there is a 
+match, the reformulation would be to substitute the matched bigram with the {\it sub-categories} 
+identified category. For example, the query "Obama family tree" would have the bigrams,
+"Obama family", "family tree", "Obama tree". of these, "Obama family" would match the 
+category page with the same title. We retrieve the following sub-categories,
+\begin{itemize}
+\item dbpedia:Category:Barack\_Obama
+\item dbpedia:Category:Non-free\_images\_of\_Obama\_family
+\end{itemize}
+The corresponding reformulations would be to clean the strings and append the token tree with each of 
+these category titles. Although the second category title seems less meaningful, we do not filter it 
+at this stage and allow the reformulation.
+
+Until now, we have not considered the named entities in the search query. Our consideration of 
+named entities is limited to place names and person names. Queries that fail to match any of the above three 
+methods would now be checked for name and place entities. We use the dbpedia lookup service \cite{dbpedia:lookup} 
+that looks up mirror pages of Wikipedia on dbpedia that stores all the structured content of its peer on Wikipedia.
+Again we start by checking the query as a whole for entity. Pages in Wikipedia and their corresponding 
+mirror on dbpedia provide class attribute that enables entity class checking. A null value for the class indicates that the page 
+does not represent an entity. We filter only those with the value \url{http://dbpedia.org/ontology/Place}
+and \url{http://dbpedia.org/ontology/Person}. We then generate bigrams of the search query to check for 
+parts of the query that might qualify as an entity. This time the bigrams are limited to those that 
+conserve the original word order in the search query. 
+
+We do not attempt to reformulate queries that fail to retrieve reformulations in any of the above methods.
+We assume such queries are specific enough to not qualify for diversification. \cite{santos2010selectively} 
+argues that  diversification is not suitable for every search query and one should abstain from it when 
+not appropriate.
+
+
 \subsection{Ranking reformulations}
 \label{ss:ranking}
+We then rank the reformulated search queries using the method prescribed by 
+\cite{santos2010exploiting} in equations Eq.8 and Eq.9. They use the metric 
+to rank the sub-queries they generate based their relative importance. Since 
+our method also generative similar reformulations we reuse this metric.
+The metric helps bubble up those reformulations that are meaningful, that is, 
+those reformulations that share some of it top 10 search results with the 
+original search query result would be ranked at the top. We then select the 
+top n reformulations to pick search results to append with the original search 
+query result.
 
-
-\section{Evaluation}
-\label{sect:eval}
-
-
-\section{}
-\label{s:layout}
-
-\subsection{Fonts}
-
-
-\begin{table}[h]
-\begin{center}
-\begin{tabular}{|l|rl|}
-\hline \bf Type of Text & \bf Font Size & \bf Style \\ \hline
-paper title & 15 pt & bold \\
-author names & 12 pt & bold \\
-author affiliation & 12 pt & \\
-the word ``Abstract'' & 12 pt & bold \\
-section titles & 12 pt & bold \\
-document text & 11 pt  &\\
-captions & 11 pt & \\
-abstract text & 10 pt & \\
-bibliography & 10 pt & \\
-footnotes & 9 pt & \\
-\hline
-\end{tabular}
-\end{center}
-\caption{\label{font-table} Font guide. }
-\end{table}
-
-\subsection{The First Page}
-\label{ssec:first}
-
-\subsection{Sections}
-
-\subsection{Footnotes}
-
-
-\subsection{Graphics}
-
-\section{Translation of non-English Terms}
-
-\section{Length of Submission}
-\label{sec:length}
-
-\section{Other Issues}
-
+\section {Conclusions}
+We introduce a novel method to use semantic web data sources with a  
+taxonomy of things and identify web search queries or its parts 
+in the taxonomy. We then use the retrieved information from the 
+taxonomy to reformulate the web search queries to direct the 
+information retrieval in multiple directions. These search results 
+from a variety of sub-queries can then be combined to produce a 
+diverse search result. 
 
 \section*{Acknowledgments}
-We thank Dr. Ng,Hwee Thou for helping us in choosing our project topic and further 
-advise in defining our problem.
+We thank Dr. NG, Hwee Tou for helping us in choosing our project 
+topic and further advise in defining our problem.
 
 
 \bibliographystyle{acl}
-% you bib file should really go here 
 \bibliography{acl2013}
-
 
 \end{document}

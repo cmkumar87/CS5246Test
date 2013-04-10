@@ -36,6 +36,9 @@ Silviu Cucerzan.
 \newblock Large-scale named entity disambiguation based on wikipedia data.
 \newblock In {\em Proceedings of EMNLP-CoNLL}, volume~6, pages 708--716.
 
+\bibitem[\protect\citename{dbp}]{dbpedia:lookup}
+Dbpedia lookup.
+
 \bibitem[\protect\citename{Finkel \bgroup et al.\egroup
   }2005]{finkel2005incorporating}
 Jenny~Rose Finkel, Trond Grenager, and Christopher Manning.
@@ -59,6 +62,24 @@ Jiafeng Guo, Gu~Xu, Xueqi Cheng, and Hang Li.
 \newblock Named entity recognition in query.
 \newblock In {\em Proceedings of the 32nd international ACM SIGIR conference on
   Research and development in information retrieval}, pages 267--274. ACM.
+
+\bibitem[\protect\citename{Hoffart \bgroup et al.\egroup
+  }2011]{hoffart2011robust}
+Johannes Hoffart, Mohamed~Amir Yosef, Ilaria Bordino, Hagen F{\"u}rstenau,
+  Manfred Pinkal, Marc Spaniol, Bilyana Taneva, Stefan Thater, and Gerhard
+  Weikum.
+\newblock 2011.
+\newblock Robust disambiguation of named entities in text.
+\newblock In {\em Proceedings of the Conference on Empirical Methods in Natural
+  Language Processing}, pages 782--792. Association for Computational
+  Linguistics.
+
+\bibitem[\protect\citename{Lu \bgroup et al.\egroup }2010]{lu2010personalize}
+Yumao Lu, Fuchun Peng, Xing Wei, and Benoit Dumoulin.
+\newblock 2010.
+\newblock Personalize web search results with user's location.
+\newblock In {\em Proceedings of the 33rd international ACM SIGIR conference on
+  Research and development in information retrieval}, pages 763--764. ACM.
 
 \bibitem[\protect\citename{Pasca}2007]{DBLP:conf/cikm/Pasca07a}
 Marius Pasca.
@@ -98,5 +119,24 @@ Rodrygo~LT Santos, Jie Peng, Craig Macdonald, and Iadh Ounis.
 \newblock 2010c.
 \newblock Explicit search result diversification through sub-queries.
 \newblock In {\em Advances in information retrieval}, pages 87--99. Springer.
+
+\bibitem[\protect\citename{Teevan \bgroup et al.\egroup
+  }2005]{teevan2005personalizing}
+Jaime Teevan, Susan~T Dumais, and Eric Horvitz.
+\newblock 2005.
+\newblock Personalizing search via automated analysis of interests and
+  activities.
+\newblock In {\em Proceedings of the 28th annual international ACM SIGIR
+  conference on Research and development in information retrieval}, pages
+  449--456. ACM.
+
+\bibitem[\protect\citename{wik}a]{wikicat:Online}
+Wikipedia category hierarchy.
+
+\bibitem[\protect\citename{wik}b]{wiki:Online}
+Wikipedia, the free encyclopedia.
+
+\bibitem[\protect\citename{wik}c]{wikidisamb:Online}
+Wikipedia:disambiguation.
 
 \end{thebibliography}

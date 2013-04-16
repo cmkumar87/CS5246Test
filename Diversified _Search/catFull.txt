@@ -1,0 +1,5 @@
+[Dinosaurs || [Ornithodirans, Pterosaurs, Dinosaurs]
+, Poker_tournaments || [Card game competitions, Poker tournaments]
+, Starbucks || [Wikipedia categories named after restaurants]
+, Cell_phones || [Cell phones]
+]

@@ -1,7 +1,9 @@
 package com.textprocessing.assignment.processor;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -18,6 +20,7 @@ import com.textprocessing.assignment.ontology.executor.disambiguity.IDisambiguit
 import com.textprocessing.assignment.ontology.lookup.DbpediaLookupExecutor;
 import com.textprocessing.assignment.ontology.lookup.LookupContent;
 import com.textprocessing.assignment.query.cleaner.StringProcessor;
+import com.textprocessing.assignment.query.ranking.QueryRank;
 
 public class DiversificationProcessor {
 
@@ -27,6 +30,19 @@ public class DiversificationProcessor {
 	private RepositoryConnection con;
 	private DbpediaLookupExecutor lookupExecutor;
 	private StringProcessor strProcessor;
+	
+	private List<OutputContent> disAmbiList = new ArrayList<OutputContent>();
+	private List<OutputContent> cateFullList = new ArrayList<OutputContent>();
+	private List<OutputContent> cateBigramList = new ArrayList<OutputContent>();
+	private List<OutputContent> lookupFullList = new ArrayList<OutputContent>();
+	private List<OutputContent> lookupBigram = new ArrayList<OutputContent>();
+	
+	private int disAmbiCount = 0;
+	private int catFullCount = 0;
+	private int catBigramCount = 0;
+	private int lookupFullCount = 0;
+	private int lookupBiCount = 0;
+	
 	
 	public DiversificationProcessor() {
 		connector = new OntologyConnector(SESAME_SERVER);
@@ -48,8 +64,14 @@ public class DiversificationProcessor {
 			Map<String, String> upperCasedBigrams = upperCaseUnderScoreAll(bigramTokensMap);
 			//reformulatedQueries(upperCasedBigrams);
 			objs = reExecuteBigramQueries(upperCasedBigrams);
+			if(objs != null && objs.size() > 0){
+				cateBigramList.add(new OutputContent(searchQuery, objs));
+				catBigramCount = catBigramCount + objs.size();
+			}
 		}else{
 			objs = checkSkosObjs(levelOneresultMap);
+			cateFullList.add(new OutputContent(searchQuery, objs));
+			catFullCount = catFullCount + objs.size();
 		}
 		if(objs != null && objs.size() > 0){
 			System.out.println("Categories reformulation result for query - " + searchQuery + "\n" + objs.toString());
@@ -184,6 +206,8 @@ public class DiversificationProcessor {
 		List<String> objs = getDisambiquityResults(firstLevel[firstLevel.length - 1]);
 		if (objs != null && objs.size() > 0) {
 			List<String> updatedObjs = removeUnderScore(objs);
+			disAmbiList.add(new OutputContent(firstLevel[firstLevel.length - 1], updatedObjs));
+			disAmbiCount = disAmbiCount + updatedObjs.size();
 			System.out.println(String.format("Disambiguities for search query - %s | Below is the list \n%s",firstLevel[firstLevel.length - 1], updatedObjs.toString()));
 		}if(objs == null || objs.size() == 0){
 			System.out.println(String.format("NO disambiguities for search query - %s | Proceeding with category findings", firstLevel[firstLevel.length - 1]));
@@ -209,19 +233,42 @@ public class DiversificationProcessor {
 					List<String> indiObjs = getClassCateForLookup(contentDetails, bigram, remainPart);
 					if (indiObjs == null || indiObjs.size() == 0) {
 						System.out.println(String.format("Search Token - %s is NOT an entity", bigram));
+						
 					}else{
 						objs.addAll(indiObjs);
+						lookupBigram.add(new OutputContent(firstLevel[firstLevel.length - 1], objs));
+						lookupBiCount = lookupBiCount + objs.size();
 					}
 					//	System.out.println(String.format("Query Token - %s | Content - %s", tokenizedQuery[i], contentDetails.toString()));
 				}
 			}else{
 				objs.addAll(indiObjsAll);
+				lookupFullList.add(new OutputContent(firstLevel[firstLevel.length - 1], objs));
+				lookupFullCount = lookupFullCount + objs.size();
 			}
 			System.out.println("Lookup reformulation result for search query - " + firstLevel[firstLevel.length - 1] + "\n" +objs.toString());
 		}
+		writeToFiles();
 		return objs;
 	}
 	
+	private void writeToFiles() throws FileNotFoundException, UnsupportedEncodingException {
+		if (disAmbiList.size() > 0) {
+			openFileAndWrite("disami.txt", disAmbiList.toString());
+		}if (cateFullList.size() > 0) {
+			openFileAndWrite("catFull.txt", cateFullList.toString());
+		}if (cateBigramList.size() > 0) {
+			openFileAndWrite("catBigram.txt", cateBigramList.toString());
+		}if (lookupFullList.size() > 0) {
+			openFileAndWrite("lookupFull.txt", lookupFullList.toString());
+		}if (lookupBigram.size() > 0) {
+			openFileAndWrite("lookupBigram.txt", lookupBigram.toString());
+		}
+		double avg = ( disAmbiCount + catFullCount + catBigramCount + lookupFullCount + lookupBiCount ) / 50.0;
+		String finalInfo = String.format("DisAmbi Count - %s \n Category Full Count - %s \n Categor Bigram Count - %s \n Lookup Full Count - %s \n Lookup Bigram Count - %s \n\n\n" +
+				"AVERAGE REFORMULATED COUNT - %s", disAmbiCount, catFullCount, catBigramCount, lookupFullCount, lookupBiCount, avg);
+		openFileAndWrite("FinalStat.txt", finalInfo);
+	}
 	
 	private List<String> getClassCate(List<LookupContent> contentDetails, String token, String searchQuery) {
 		Iterator<LookupContent> lookupItr = contentDetails.iterator();
@@ -325,6 +372,18 @@ public class DiversificationProcessor {
 			objs = disambiguityExecutor.processRequest(con, searchQuery);
 		}
 		return objs;
+	}
+	
+	private void openFileAndWrite(String fileName, String content) throws FileNotFoundException, UnsupportedEncodingException {
+		PrintWriter writer = new PrintWriter(fileName, "UTF-8");
+		writer.println(content);
+		writer.close();
+	}
+	
+	private List<String> rankReformulatedQueries(List<String> reformedQueries) {
+		QueryRank rank = new QueryRank(reformedQueries);
+		List<String> rankedObjs = rank.getRankedQueriesFormula1();
+		return rankedObjs;
 	}
 	
 }

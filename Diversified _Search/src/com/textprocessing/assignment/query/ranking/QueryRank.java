@@ -70,8 +70,7 @@ public class QueryRank
 					}
 				}
 			}
-			if (matches == 0) score = 0;
-			else score *= 1.0 / matches * matchRankSum;
+			if (matches > 0) score *= 1.0 / matches * matchRankSum;
 			gsList.get(i).setScore(score);
 		}
 		Collections.sort(gsList);

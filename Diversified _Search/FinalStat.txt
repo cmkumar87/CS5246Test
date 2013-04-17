@@ -1,8 +1,8 @@
-DisAmbi Count - 244 
- Category Full Count - 7 
+DisAmbi Count - 0 
+ Category Full Count - 0 
  Categor Bigram Count - 0 
- Lookup Full Count - 0 
- Lookup Bigram Count - 2322 
+ Lookup Full Count - 28 
+ Lookup Bigram Count - 0 
 
 
-AVERAGE REFORMULATED COUNT - 51.46
+AVERAGE REFORMULATED COUNT - 0.56
